@@ -40,8 +40,9 @@ const Profile = () => {
     if (result.isConfirmed) {
       localStorage.clear();  // Clear local storage on confirmation
       console.log('Logged out and localStorage cleared');
+
       // Optionally redirect to login page or home
-      // window.location.href = '/login'; 
+      window.location.href = '/'; 
     }
   });
 };
