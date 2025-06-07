@@ -150,7 +150,7 @@ const Deliveries = () => {
       </div>
 
       {/* Delivery List */}
-      <div className="px-4 space-y-3">
+      <div className="px-4  mt-2 space-y-3">
         {deliveredOrders.map((order) => (
           <div
             key={order.orderId}

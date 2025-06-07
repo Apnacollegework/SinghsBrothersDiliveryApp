@@ -39,7 +39,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!isOnline) return;
-    
+
     const interval = setInterval(() => {
       if (!showNewOrder && !isAnimatingOut) {
         const nextOrder = newOrdersQueue[orderIndex % newOrdersQueue.length];
@@ -55,7 +55,7 @@ const Home = () => {
   const handleGetOrder = () => {
     setIsAnimatingOut(true);
     setShowCelebration(true);
-    
+
     // Add the order to the main list and update wallet
     if (currentNewOrder) {
       setOrders(prev => [...prev, currentNewOrder]);
@@ -111,13 +111,24 @@ const Home = () => {
       <div>
         <div className="flex items-center justify-between bg-white/80 backdrop-blur-sm p-4 shadow-sm">
           {/* Menu Icon */}
-          <div className="text-gray-800 flex items-center size-12 shrink-0">
+          {/* <div className="text-gray-800 flex items-center size-12 shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
               <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z" />
             </svg>
+          </div> */}
+
+          <div className="text-gray-800 flex items-center ">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              width={76}    // increased size
+              height={76}   // increased size
+              className="object-contain"
+            />
           </div>
 
-         
+
+
 
 
           {/* Right side controls */}
@@ -129,27 +140,49 @@ const Home = () => {
               </span>
               <button
                 onClick={toggleOnlineStatus}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                  isOnline 
-                    ? 'bg-green-500 focus:ring-green-500' 
-                    : 'bg-gray-300 focus:ring-gray-500'
-                }`}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isOnline
+                  ? 'bg-green-500 focus:ring-green-500'
+                  : 'bg-gray-300 focus:ring-gray-500'
+                  }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    isOnline ? 'translate-x-6' : 'translate-x-1'
-                  }`}
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isOnline ? 'translate-x-6' : 'translate-x-1'
+                    }`}
                 />
               </button>
             </div>
 
             {/* Wallet Button */}
-            <button className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+            {/* <button className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
                 <path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM32,64H224V88H32ZM32,192V104H224v88H32Zm136-48a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z" />
               </svg>
               <span className="font-semibold text-sm">₹{walletBalance.toFixed(2)}</span>
+            </button> */}
+
+
+
+
+            <button className="group  bg-white/10 border-2 border-gray-200  hover:bg-white/20  text-gray-800 px-3 py-1.5 rounded-xl  transition-all duration-300 transform hover:scale-105">
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md group-hover:shadow-lg transition-shadow duration-200">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14px"
+                    height="14px"
+                    fill="white"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM32,64H224V88H32ZM32,192V104H224v88H32Zm136-48a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[10px] text-gray-600 font-medium uppercase tracking-wide">Wallet</div>
+                  <div className="font-bold text-sm text-gray-900">₹{walletBalance.toFixed(2)}</div>
+                </div>
+              </div>
             </button>
+
           </div>
         </div>
 
@@ -163,7 +196,7 @@ const Home = () => {
         {/* Order List */}
         <div className="space-y-2 px-4 pt-4">
 
-           {/* Title */}
+          {/* Title */}
           <h2 className="text-gray-800 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
             Available Orders ({orders.length})
           </h2>
@@ -193,11 +226,10 @@ const Home = () => {
 
       {/* Bottom CTA Button */}
       <div className="px-5 pb-5">
-        <button className={`flex h-14 w-full items-center justify-center gap-4 rounded-xl px-5 text-base font-bold shadow-lg transition-all duration-200 hover:shadow-xl ${
-          isOnline 
-            ? 'bg-gradient-to-r from-rose-200 to-pink-200 hover:from-rose-300 hover:to-pink-300 text-gray-800' 
-            : 'bg-gradient-to-r from-gray-300 to-gray-400 text-gray-600 cursor-not-allowed'
-        }`}>
+        <button className={`flex h-14 w-full items-center justify-center gap-4 rounded-xl px-5 text-base font-bold shadow-lg transition-all duration-200 hover:shadow-xl ${isOnline
+          ? 'bg-gradient-to-r from-rose-200 to-pink-200 hover:from-rose-300 hover:to-pink-300 text-gray-800'
+          : 'bg-gradient-to-r from-gray-300 to-gray-400 text-gray-600 cursor-not-allowed'
+          }`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
             <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z" />
           </svg>
@@ -207,22 +239,20 @@ const Home = () => {
 
       {/* Bottom Drawer (Dynamic) - Only show when online */}
       {showNewOrder && currentNewOrder && isOnline && (
-        <div className={`fixed inset-0 z-40 flex flex-col justify-end items-stretch transition-all duration-300 ${
-          isAnimatingOut ? 'bg-black/0' : 'bg-black/50'
-        }`}>
-          <div className={`flex flex-col bg-white rounded-t-3xl shadow-2xl transform transition-all duration-500 ease-out ${
-            showNewOrder && !isAnimatingOut 
-              ? 'translate-y-0 opacity-100' 
-              : 'translate-y-full opacity-0'
+        <div className={`fixed inset-0 z-40 flex flex-col justify-end items-stretch transition-all duration-300 ${isAnimatingOut ? 'bg-black/0' : 'bg-black/50'
           }`}>
+          <div className={`flex flex-col bg-white rounded-t-3xl shadow-2xl transform transition-all duration-500 ease-out ${showNewOrder && !isAnimatingOut
+            ? 'translate-y-0 opacity-100'
+            : 'translate-y-full opacity-0'
+            }`}>
             {/* Handle */}
-            <button 
+            <button
               className="flex h-8 w-full items-center justify-center"
               onClick={handleDismiss}
             >
               <div className="h-1.5 w-12 rounded-full bg-gray-300 hover:bg-gray-400 transition-colors"></div>
             </button>
-            
+
             {/* Content */}
             <div className="flex-1 px-6 pb-20">
               <div className="text-center mb-6">
@@ -252,13 +282,13 @@ const Home = () => {
               </div>
 
               <div className="flex gap-3">
-                <button 
+                <button
                   onClick={handleDismiss}
                   className="flex-1 rounded-xl bg-gray-200 hover:bg-gray-300 px-6 py-4 text-gray-700 font-bold transition-all duration-200"
                 >
-                  Skip
+                  Pass Order
                 </button>
-                <button 
+                <button
                   onClick={handleGetOrder}
                   className="flex-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 px-8 py-4 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 >
